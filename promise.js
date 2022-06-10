@@ -6,14 +6,11 @@ const promiseOutput = async (emosi) => {
     const theaterIXX = await promiseTheaterIXX();
     const theaterVGC = await promiseTheaterVGC();
 
-   const list = [...theaterIXX, ...theaterVGC];
-   let total = 0;
-   list.forEach(item => {
-     const { hasil } = item;
-     hasil === emosi ? total++ : total + 0;
-   });
+   const total = [...theaterIXX, ...theaterVGC].reduce((acc, val) => {
+    return val.hasil === emosi ? ++acc : acc;
+   },0);
 
-  return total;
+   return total;
 
   } catch (err) {
     console.log(err);
